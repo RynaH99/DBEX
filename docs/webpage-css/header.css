@@ -1,0 +1,74 @@
+.header {
+    height: 100px;
+    background-color: rgb(249, 252, 255);
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .25);
+    z-index: 1000;
+
+}
+
+.left-header {
+    flex: 1;
+    font-family: "Russo One", sans-serif;
+    font-weight: 500;
+    font-size: 55px;
+    margin-left: 50px;
+}
+.anchor-logo{
+    padding: 0px;
+    margin-left: 30px;
+    cursor: pointer;
+    
+    
+}
+.logo-pic{
+    height: 60px;
+}
+
+.middle-header {
+flex: 3;
+
+}
+.anchor-ind, .anchor-prod, .anchor-TBD{
+    padding: 10px;
+    margin-left: 30px;
+    font-size: 20px;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+    border-radius: 5px;
+}
+.anchor-ind:hover, .anchor-prod:hover, .anchor-TBD:hover{
+    background-color: rgb(197, 197, 197);
+
+}
+
+.right-header {
+flex: 1;
+
+}
+.live-demo{
+    padding: 10px;
+    background-color: rgb(147, 147, 147);
+    border-radius: 5px;
+    border-width: 0;
+    font-size: 20px;
+    text-decoration: none;
+    color: black;
+    
+}
+
+.live-demo:hover{
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, .25);
+    background-color: black;
+    color: white;
+}
+
