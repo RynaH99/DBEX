@@ -47,7 +47,7 @@ app.post('/api/users', async (req, res) => {
 app.put('/api/user/:id', async (req, res) => {
     try {
         const {id} = req.params;
-        const user = await UserInfo.findByIdAndUpdate(id, req.body);
+        const user = await UserInfo.findByIdAndUpdate(id, req.body, {new: true});
 
         if (!user) {
             return res.status(404).json({message: 'UserInfo not found'});
