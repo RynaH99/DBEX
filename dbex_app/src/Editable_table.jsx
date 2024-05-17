@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import './User_input.css'
+import axios from 'axios'; // Import Axios for HTTP requests
+import './CSS Files/Editable_table.css'
 
-export default function User_input(){
+export default function Editable_table(){
 
     const [backendData, setBackendData] = useState([]);
+    const [hasChanges, setHasChanges] = useState([false]);
 
+        //? Calls data from backend api 
     useEffect(() => {
-      // Fetch data from API when the component mounts
         fetch('http://localhost:5000/api/users')
         .then(response => response.json())
         .then(data => {
@@ -15,16 +17,46 @@ export default function User_input(){
         .catch(error => {
             console.error('Error fetching data:', error);
         });
-    }, []); // Empty dependency array ensures this effect runs only once
+    }, []); //? add empty dependency [] to make sure that api is only called once
 
-    const handleChange = (index, key,value) => {
-        const newData = [...backendData];
-        newData[index][key] = value;
-        setBackendData(newData)
+    const handleChange = (index, key, value) => {
+        const updatedData = backendData.map((item, idx) => {
+            if (idx === index) {
+                return { ...item, [key]: value };
+            } else {
+                return item;
+            }
+        });
+        setBackendData(updatedData);
+        setHasChanges(true);
+    };
+
+    const saveToDatabase = () => {
+        if (hasChanges) {
+            console.log("Changes were made to the users table. Pushing data,", backendData);
+
+            backendData.forEach(user => {
+            axios.put(`http://localhost:5000/api/new_user/${user._id}`, user)
+                .then(response => {
+                    console.log('Updated Successfully', response.data);
+                })
+                .catch(error => {
+                    console.error("Error updating user info", error);
+                })
+            })
+            setHasChanges(false);
+        } else {
+            console.log("No Changes Detected")
+        }
+        
     }
+
 
     return(
         <>
+        <div>
+            <button class='saveToDatabaseButton' border="2px" onClick={saveToDatabase}>Save to Database</button>
+        </div>
         <div>
             {backendData.length === 0 ? (
                 <p>Loading...</p>
@@ -65,12 +97,6 @@ export default function User_input(){
                 ))}
             </table>
             )}
-            
-        </div>
-        <div>
-            <button>
-                Save to Database
-            </button>
         </div>
         </>
     );
