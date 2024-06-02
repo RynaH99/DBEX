@@ -1,9 +1,9 @@
 # Ryan Ignores
 #~~~~~~~~~~~~~~~~~~~~~~~~
 node_modules
-package-lock.json
-package.json
-public
+# package-lock.json
+# package.json
+# public
 client
 dbex_app
 #~~~~~~~~~~~~~~~~~~~~~~~~
