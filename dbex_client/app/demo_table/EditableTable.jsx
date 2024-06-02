@@ -1,6 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios'; // Import Axios for HTTP requests
+import ReactDataGrid from 'react-data-grid';
 import './globals.css'
 
 
@@ -16,7 +17,7 @@ export default function EditableTable(){
         .then(data => {
             setBackendData(data);
         console.log(data)
-        })
+        }) 
         .catch(error => {
             console.error('Error fetching data:', error);
         });
@@ -57,47 +58,46 @@ export default function EditableTable(){
 
     return(
         <>
-        <div className='p-3'>
-            <button className='bg-black hover:bg-black-lightest text-white font-bold py-2 px-4 rounded-full border border-black-700 m-1 p-4' onClick={saveToDatabase}>Save to Database</button>
+        <div className='p-3 flex-row items-center mb-4'>
+            <button className='bg-black hover:bg-black-lightest text-white font-bold py-2 px-4 rounded-full border border-black-700 m-1 p-4 ' onClick={saveToDatabase}>Save to Database</button>
         </div>
-        <div className='pl-5'>
+        <div className='pl-5 flex justify-center items-center'>
             {backendData.length === 0 ? (
                 <p>Loading...</p>
             ) : (
-                <table  className='box-border p-4 border-4 border-white-400 bg-blue-200' >
-                <tr>
-                    {/* model for user info */}
-                    <td>User ID</td>
-                    <td>User Name</td>
-                    <td>User Password</td>
-                    {/* <td>Customer Phone #</td>
-                    <td>Customer Address</td> */}
-                </tr>
-                {backendData.map((user,index) => (
-                <tr key={user._id}>
-                    <td>
-                        <input
-                            type="text"
-                            value={user._id}
-                            onChange={(e) => handleChange(index, '_id', e.target.value)}
-                        />
-                    </td>
-                    <td>
-                        <input
-                            type="text"
-                            value={user.username}
-                            onChange={(e) => handleChange(index, 'username', e.target.value)}
-                        />
-                    </td>
-                    <td>
-                        <input
-                            type="text"
-                            value={user.password}
-                            onChange={(e) => handleChange(index, 'password', e.target.value)}
-                        />
-                    </td>
-                </tr>
-                ))}
+                <table  className='box-border p-4 border-4 border-white-400 bg-blue-200 flex-row items-center mb-4' >
+                    <tbody>
+                        <tr>
+                            <th className="p-2 bg-gray-400">User ID</th>
+                            <th className="p-2 bg-gray-400">User Name</th>
+                            <th className="p-2 bg-gray-400">User Password</th>
+                        </tr>
+                        {backendData.map((user,index) => (
+                        <tr key={user._id}>
+                            <td>
+                                <input
+                                    type="text"
+                                    value={user._id}
+                                    onChange={(e) => handleChange(index, '_id', e.target.value)}
+                                />
+                            </td>
+                            <td>
+                                <input
+                                    type="text"
+                                    value={user.username}
+                                    onChange={(e) => handleChange(index, 'username', e.target.value)}
+                                />
+                            </td>
+                            <td>
+                                <input
+                                    type="text"
+                                    value={user.password}
+                                    onChange={(e) => handleChange(index, 'password', e.target.value)}
+                                />
+                            </td>
+                        </tr>
+                    ))}
+                    </tbody>
             </table>
             )}
         </div>

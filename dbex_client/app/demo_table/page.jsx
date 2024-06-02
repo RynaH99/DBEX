@@ -7,6 +7,7 @@ export default async function DemoScreen() {
 
     return(
         <>
+            <title>DBEX Demo</title>
             <DemoNavbar/>
             <div className="bg-black min-h-screen">
                 
