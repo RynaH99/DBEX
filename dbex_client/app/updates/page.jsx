@@ -1,4 +1,5 @@
 import Navbar from './Navbar.jsx'
+import Updates from './updates.jsx'
 import './globals.css'
 
 export default function updatePage() {
@@ -7,6 +8,7 @@ export default function updatePage() {
         <div className="bg-black min-h-screen">
             <title>DBEX Home</title>
             <Navbar/>
+            <Updates/>
         </div>
         </>
     )

@@ -1,4 +1,4 @@
-import './globals.css'
+import '../globals.css'
 import Link from 'next/link';
 
 function Navbar() {
@@ -11,11 +11,7 @@ function Navbar() {
                 </div>
                 <ul className="flex space-x-4">
                     <li><a href="/" className="text-white font-bold hover:text-gray-300">Home</a></li>
-                    <li>
-                        <Link href="/updates/createUpdate" legacyBehavior>
-                            <a className="bg-white text-black border-full rounded p-2 font-bold hover:text-gray-300">Add Update</a>
-                        </Link>
-                    </li>
+                    <li><a href="/updates" className="text-white font-bold hover:text-gray-300">Updates</a></li>
                 </ul>
             </div>
         </nav>
