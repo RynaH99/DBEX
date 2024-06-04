@@ -9,7 +9,7 @@ export default async function Home() {
     <div className="bg-black min-h-screen">
         <title>DBEX Home</title>
         <Navbar/>
-        <WelcomeText/>
+        {/* <WelcomeText/> */}
     </div>
     </>)
 }

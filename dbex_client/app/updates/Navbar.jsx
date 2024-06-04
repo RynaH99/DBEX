@@ -1,7 +1,16 @@
+'use client';
 import './globals.css'
 import Link from 'next/link';
+import UpdatePopup from './updatePopup.jsx'
+import React, { useState } from 'react';
 
 function Navbar() {
+    const [showPopup, setShowPopup] = useState(false)
+
+    const togglePopup = () => {
+        setShowPopup(!showPopup)
+    }
+
     return (
         <nav className="bg-black p-4 border-b border-white">
             <div className="container mx-auto flex justify-between items-center">
