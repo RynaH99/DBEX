@@ -1,9 +1,9 @@
-import Image from "next/image";
+import Header from './header.jsx';
 
 export default function Home() {
   return (
     <>
-    
+      <Header/>
     </>
   );
 }
