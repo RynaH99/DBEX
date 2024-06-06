@@ -1,0 +1,18 @@
+body {
+    height: 4000px;
+    margin: 0;
+    padding-top: 100px;
+}
+
+p {
+    font-family: oswald, arial;
+}
+div {
+    font-family: oswald, arial;
+
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
