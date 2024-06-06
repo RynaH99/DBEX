@@ -1,5 +1,5 @@
 import Image from 'next/image';
-export default function LoginNavbar() {
+export default function DefaultNavbar() {
 
     return(
         <header className="fixed top-0 left-0 right-0 bg-black text-white p-4 z-50 shadow-lg shadow-gray-500/50">
@@ -10,8 +10,9 @@ export default function LoginNavbar() {
                 </div>
                 <nav>
                     <ul className="flex space-x-4">
-                        <li><a href="/UserDashboard" className="text-black bg-white border rounded font-bold hover:text-gray-800 p-1">TEMP ENTRY</a></li>
                         <li><a href="/contact" className="text-white font-bold hover:text-gray-300">Contact Us</a></li>
+                        <li><a href="/" className="text-white font-bold hover:text-gray-300">Help</a></li>
+                        <li><a href="/UserDashboard" className="text-white font-bold hover:text-gray-300">USER PLACEHOLDER</a></li>
                     </ul>
                 </nav>
             </div>

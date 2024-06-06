@@ -31,7 +31,7 @@ export default function LoginBox() {
                         </div>
                         <div className="flex justify-center p-2">
                             <button className="bg-black text-white font-bold py-2 px-4 border border-black rounded-full w-full hover:bg-gray-900 hover:text-stone-200 shadow-lg shadow-black/20">
-                                Sign In
+                                Login
                             </button>
                         </div>
                         <div className="flex justify-center">

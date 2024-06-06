@@ -5,9 +5,9 @@ import LoginNavbar from '@/app/components/loginNavbar.jsx'
 
 export default function Home() {
   return (
-    <div className="bg-white min-h-screen flex flex-col items-start justify-center overflow-auto">
+    <div className="bg-white min-h-screen flex flex-col justify-center">
       <LoginNavbar />
-      <div className="flex justify-between w-full max-w-screen-xl mt-8">
+      <div className="flex justify-between w-full mt-8">
         <LoginBox />
         <RedirectToDotCom />
       </div>
