@@ -4,6 +4,7 @@
 import { useState } from 'react'
 import CreateAccountModal from '@/app/components/CreateAccountModal.jsx'
 import { createClient } from '@supabase/supabase-js'
+import { useRouter } from 'next/navigation'
 import '@/app/globals.css'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
@@ -11,6 +12,7 @@ const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
 export default function LoginBox() {
+    const router = useRouter()
 
     //? Sets up const to pass email to handleSignIn function
     const [email, setEmail] = useState('')
@@ -40,6 +42,7 @@ export default function LoginBox() {
             }
             setIsSignedIn(true);
             setError(null);
+            router.push('/userDashboard')
         } catch (error) {
             console.error('Sign in error:', error.message);
             setError(error.message);
@@ -56,13 +59,13 @@ export default function LoginBox() {
         try{
             const {error} = await supabase.auth.signUp({
                 email,
-                password,
+                password
             })
             if (error) {
-                throw error
+                throw error;
             }
             setIsModalOpen(false);
-            setError(null)
+            setError(null);
         } catch (error) {
             console.error('Sign Up Error:', error.message)
             setError(error.message)
@@ -111,9 +114,7 @@ export default function LoginBox() {
 
                     {/* //? div to display button */}
                     <div className="flex justify-center p-2">
-                        <button className="bg-black text-white font-bold py-2 px-4 border border-black rounded-full w-full hover:bg-gray-900 hover:text-stone-200 shadow-lg shadow-black/20">
-                            Login
-                        </button>
+                        <button className="bg-black text-white font-bold py-2 px-4 border border-black rounded-full w-full hover:bg-gray-900 hover:text-stone-200 shadow-lg shadow-black/20">Login</button>
                     </div>
 
                     {/* //? conditional HTML if there is an error */}
@@ -126,8 +127,8 @@ export default function LoginBox() {
                     <div className="flex justify-center">
                         <button type="button" onClick={() => setIsModalOpen(true)} className="text-black font-bold underline py-2 px-4 rounded hover:text-stone-600">Create Account</button>
                     </div>
-                    <CreateAccountModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onSubmit={handleCreateAccount} />
                 </form>
+                <CreateAccountModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onSubmit={handleCreateAccount} />
             </div>
         </div>
     );
