@@ -1,4 +1,3 @@
-//! COMPARE FILE TO TESTING FILE 
 
 'use client'
 import { useState } from 'react'
@@ -133,5 +132,3 @@ export default function LoginBox() {
         </div>
     );
 }
-
-//! COMPARE FILE TO TESTING FILE 
