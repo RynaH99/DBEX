@@ -41,7 +41,7 @@ export default function LoginBox() {
             }
             setIsSignedIn(true);
             setError(null);
-            router.push('/userDashboard')
+            router.push('/UserDashboard')
         } catch (error) {
             console.error('Sign in error:', error.message);
             setError(error.message);
