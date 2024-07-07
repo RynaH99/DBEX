@@ -1,0 +1,32 @@
+.header {
+  height: 60px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  width: auto;
+  display: flex;
+  flex-direction: row;
+  border-bottom: solid 1px;
+  box-shadow: 0px 0px 5px;
+  background-color: rgb(225, 225, 225);
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.header-left {
+  flex: 1;
+}
+
+.middle-header {
+  flex: 2;
+}
+
+.header-right {
+  flex: 2;
+}
+.a-right-header {
+  margin: 5px;
+  padding: 10px;
+}

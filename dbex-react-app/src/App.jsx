@@ -1,11 +1,11 @@
-import Header from './header.jsx';
-import Footer from './footer.jsx';
+import Header from "./header.jsx";
+import MainArea from "./mainArea.jsx";
 
 function App() {
-  return(
+  return (
     <>
-    <Header/>
-    <Footer/>
+      <Header />
+      <MainArea />
     </>
   );
 }
