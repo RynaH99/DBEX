@@ -19,3 +19,8 @@
 -- SET company_ID = 2
 -- WHERE ID_auto = 3
 
+
+
+SELECT * FROM views.enum_company_base;
+SELECT * FROM views.equipment_instance_base;
+SELECT * FROM views.equipment_family_base;
