@@ -70,6 +70,9 @@ CREATE TABLE IF NOT EXISTS enum.company (
     company_name    TEXT,
     company_address TEXT --TODO: consider changing this to a more fitted data type and proper addressing. 
 );
+COMMENT ON COLUMN enum.company.ID_auto          IS 'PK';
+COMMENT ON COLUMN enum.company.company_name     IS 'Name of the Company.';
+COMMENT ON COLUMN enum.company.company_address  IS 'Address of the Company.';
 
 
 --~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -84,6 +87,7 @@ CREATE TABLE IF NOT EXISTS enum.company (
 --                                            |_|       |_|                                                            
 --~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+
 CREATE TABLE IF NOT EXISTS equipment.family (
     -- Primary Key
     ID_auto     SERIAL PRIMARY KEY,
@@ -92,6 +96,9 @@ CREATE TABLE IF NOT EXISTS equipment.family (
     family_name TEXT,
     parts_used  TEXT
 );
+COMMENT ON COLUMN equipment.family.ID_auto      IS 'PK';
+COMMENT ON COLUMN equipment.family.family_name  IS 'Group Name of the Equipment Family.';
+COMMENT ON COLUMN equipment.family.parts_used   IS 'All parts used within this family group.';
 
 
 CREATE TABLE IF NOT EXISTS equipment.instance (
@@ -109,6 +116,11 @@ CREATE TABLE IF NOT EXISTS equipment.instance (
     CONSTRAINT equipment_instance_family_ID  FOREIGN KEY (family_ID) REFERENCES equipment.family(ID_auto),
     CONSTRAINT equipment_instance_company_ID FOREIGN KEY (company_ID) REFERENCES enum.company(ID_auto)
 );
+COMMENT ON COLUMN equipment.instance.ID_auto        IS 'PK';
+COMMENT ON COLUMN equipment.instance.family_ID      IS 'FK to equipment.family';
+COMMENT ON COLUMN equipment.instance.company_ID     IS 'FK to enum.company';
+COMMENT ON COLUMN equipment.instance.device_name    IS 'Name of the individual device';
+
 
 --~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -- Create Invoice Tables
