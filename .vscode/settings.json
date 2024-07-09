@@ -1,0 +1,11 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "driver": "PostgreSQL",
+            "connectString": "postgresql://postgres.ikvhrpvommtnezfwqezr:HpmIPwH5r1SXqfKW@aws-0-us-west-1.pooler.supabase.com:6543/postgres",
+            "name": "Supabase"
+        }
+    ]
+}

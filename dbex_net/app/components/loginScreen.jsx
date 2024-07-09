@@ -39,6 +39,22 @@ export default function LoginBox() {
             if (error) {
                 throw error;
             }
+
+            const {data: userRoles, error: rolesError} = await supabase
+            .from('user_roles')
+            .select('role_name')
+            .eq('user_id', user.id)
+            .single()
+
+            if (rolesError) {
+                throw error
+            }
+
+            const role = userRoles?.role_name || 'user'
+
+            localStorage.setItem('userRole', role)
+
+
             setIsSignedIn(true);
             setError(null);
             router.push('/UserDashboard')
