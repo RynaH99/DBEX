@@ -8,10 +8,31 @@
 --   \_____|_|  \___|\__,_|\__\___| |_____/ \___|_| |_|\___|_| |_| |_|\__,_|___/
 --~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-IF NOT EXISTS(SELECT * FROM sys.schemas WHERE NAME = N'enum')       EXEC('CREATE SCHEMA [enum]')
-IF NOT EXISTS(SELECT * FROM sys.schemas WHERE NAME = N'equipment')  EXEC('CREATE SCHEMA [equipment]')
--- IF NOT EXISTS(SELECT * FROM sys.schemas WHERE NAME = N'products')   EXEC('CREATE SCHEMA [products]')
-IF NOT EXISTS(SELECT * FROM sys.schemas WHERE NAME = N'invoices')   EXEC('CREATE SCHEMA [invoices]')
+
+-- TODO: Come back and optimize / improve this chunk.
+DO $$ BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_namespace WHERE nspname = 'enum') THEN
+        EXECUTE 'CREATE SCHEMA enum';
+    END IF;
+END $$;
+
+DO $$ BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_namespace WHERE nspname = 'views') THEN -- 'view' is a reserved word, 'views' is not. 
+        EXECUTE 'CREATE SCHEMA views';
+    END IF;
+END $$;
+
+DO $$ BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_namespace WHERE nspname = 'equipment') THEN
+        EXECUTE 'CREATE SCHEMA equipment';
+    END IF;
+END $$;
+
+DO $$ BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_namespace WHERE nspname = 'invoices') THEN
+        EXECUTE 'CREATE SCHEMA invoices';
+    END IF;
+END $$;
 
 
 /*
@@ -42,10 +63,13 @@ Idea: Make an App later
 
 
 CREATE TABLE IF NOT EXISTS enum.company (
+    -- Primary Key
     ID_auto         SERIAL PRIMARY KEY,
+
+    -- Data Columns
     company_name    TEXT,
     company_address TEXT --TODO: consider changing this to a more fitted data type and proper addressing. 
-)
+);
 
 
 --~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -61,17 +85,27 @@ CREATE TABLE IF NOT EXISTS enum.company (
 --~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 CREATE TABLE IF NOT EXISTS equipment.family (
+    -- Primary Key
     ID_auto     SERIAL PRIMARY KEY,
+
+    -- Data Columns
     family_name TEXT,
     parts_used  TEXT
 );
 
 
 CREATE TABLE IF NOT EXISTS equipment.instance (
+    -- Primary Key
     ID_auto     SERIAL PRIMARY KEY,
-    device_name TEXT,
+    
+    -- Foreign Keys
     family_ID   INTEGER,
     company_ID  INTEGER,
+
+    -- Data Columns
+    device_name TEXT,
+
+    -- Constraints
     CONSTRAINT equipment_instance_family_ID  FOREIGN KEY (family_ID) REFERENCES equipment.family(ID_auto),
     CONSTRAINT equipment_instance_company_ID FOREIGN KEY (company_ID) REFERENCES enum.company(ID_auto)
 );
