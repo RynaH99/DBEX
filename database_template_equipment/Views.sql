@@ -1,7 +1,7 @@
 
-DROP VIEW IF EXISTS equipment_view;
+DROP VIEW IF EXISTS views.equipment_instance_base;
 
-CREATE VIEW equipment_view AS
+CREATE VIEW views.equipment_instance_base AS
 SELECT 
     instance.ID_auto        AS "ID",
     instance.device_name    AS "Name",
