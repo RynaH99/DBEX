@@ -6,4 +6,5 @@ node_modules
 # public
 client
 dbex_app
+.vscode
 #~~~~~~~~~~~~~~~~~~~~~~~~
