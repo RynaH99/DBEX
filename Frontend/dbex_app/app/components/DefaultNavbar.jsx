@@ -12,7 +12,7 @@ export default function DefaultNavbar() {
                     <ul className="flex space-x-4">
                         <li><a href="/contact" className="text-white font-bold hover:text-gray-300">Contact Us</a></li>
                         <li><a href="/" className="text-white font-bold hover:text-gray-300">Help</a></li>
-                        <li><a href="/LoginPage" className="text-white font-bold hover:text-gray-300">Login</a></li>
+                        <li><a href="/LoginPage" className="text-black bg-white border rounded font-bold hover:text-gray-800 p-1">Login</a></li>
                     </ul>
                 </nav>
             </div>
