@@ -1,0 +1,3 @@
+
+
+If you accidentally have multiple different ports running at the same time run "npx kill-port 8080" where 8080 is the port you want to kill
