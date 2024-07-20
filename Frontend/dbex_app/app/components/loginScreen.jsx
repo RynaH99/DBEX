@@ -32,37 +32,44 @@ export default function LoginBox() {
     const handleSignIn = async (e) => {
         e.preventDefault();
         try {
-            const { error } = await supabase.auth.signInWithPassword({
+            const { data, error } = await supabase.auth.signInWithPassword({
                 email,
                 password,
             });
             if (error) {
                 throw error;
             }
-
-            const {data: userRoles, error: rolesError} = await supabase
-            .from('user_roles')
-            .select('role_name')
-            .eq('user_id', user.id)
-            .single()
-
-            if (rolesError) {
-                throw error
+            
+            const user = data.user;
+    
+            // Fetching the user role
+            const { data: userRoleData, error: userRoleError } = await supabase
+                .from('rbac.user_roles')
+                .select(`
+                    role_id,
+                    rbac.roles (role_name)
+                `)
+                .eq('user_id', user.id)
+                .single();
+            
+            if (userRoleError) {
+                throw userRoleError;
             }
-
-            const role = userRoles?.role_name || 'user'
-
-            localStorage.setItem('userRole', role)
-
-
+    
+            const role = userRoleData?.rbac.roles?.role_name || 'user'; // Default role if none found
+            
+            // Store the role in localStorage or session storage
+            localStorage.setItem('userRole', role);
+    
             setIsSignedIn(true);
             setError(null);
-            router.push('/UserDashboard')
+            router.push('/UserDashboard');
         } catch (error) {
             console.error('Sign in error:', error.message);
             setError(error.message);
         }
     };
+    
 
     const handleCreateAccount = async (e) => {
         e.preventDefault()
@@ -97,7 +104,7 @@ export default function LoginBox() {
                     <div className="mb-4">
                         <input
                             type="email"
-                            className="border-b-2 border-black outline-none w-full p-2"
+                            className="border-b-2 border-black outline-none w-full p-2 text-black"
                             placeholder="Email*"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
@@ -109,7 +116,7 @@ export default function LoginBox() {
                     <div className="mb-4">
                         <input
                             type="password"
-                            className="border-b-2 border-black outline-none w-full p-2"
+                            className="border-b-2 border-black outline-none w-full p-2 text-black"
                             placeholder="Password*"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
@@ -139,8 +146,11 @@ export default function LoginBox() {
                     {isSignedIn && <p className="text-green-500 text-center mt-2">You are signed in!</p>}
 
                     {/* //? Create Account button */}
-                    <div className="flex justify-center">
+                    {/* <div className="flex justify-center">
                         <button type="button" onClick={() => setIsModalOpen(true)} className="text-black font-bold underline py-2 px-4 rounded hover:text-stone-600">Create Account</button>
+                    </div> */}
+                    <div className='flex justify-center flex-col'>
+                        <button className='text-black font-bold underline py-2 px-4 rounded hover:text-stone-600'>Don't Have an account? <br/>Contact your company admin for help </button> {/* TODO: Add account request on a per company basis */}
                     </div>
                 </form>
                 <CreateAccountModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onSubmit={handleCreateAccount} />
